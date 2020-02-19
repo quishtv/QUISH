@@ -1,0 +1,15 @@
+# http://standards.freedesktop.org/desktop-entry-spec/desktop-entry-spec-1.0.html
+
+[Desktop Entry]
+Encoding=UTF-8
+Name=QUISH
+Comment=QUISH QT main network
+GenericName=QUISH Digital Currency QT client main network
+Exec=QUISH-core.qt %u
+Terminal=false
+Type=Application
+Icon=${SNAP}/share/pixmaps/QUISH.png
+MimeType=x-scheme-handler/QUISH;
+Categories=X-Office;X-Finance;
+Keywords=internet;QUISH;zQTV;QTV;core;wallet;qt;main;snap;launchpad;crypto;digital;currency;coin;token;zerocoin;
+Version=1.0

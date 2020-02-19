@@ -1,0 +1,15 @@
+# http://standards.freedesktop.org/desktop-entry-spec/desktop-entry-spec-1.0.html
+
+[Desktop Entry]
+Encoding=UTF-8
+Name=QUISH Daemon SNAP
+Comment=main
+GenericName=QUISH Digital Currency Daemon Client main network
+Exec=QUISH-core.daemon %u
+Terminal=true
+Type=Application
+Icon=${SNAP}/share/pixmaps/QUISH.png
+MimeType=x-scheme-handler/QTV;
+Categories=X-Office;X-Finance;
+Keywords=internet;QUISH;zQTV;core;wallet;daemon;main;snap;launchpad;crypto;digital;currency;coin;token;zerocoin;
+Version=1.0

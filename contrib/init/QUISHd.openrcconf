@@ -1,0 +1,33 @@
+# /etc/conf.d/QUISHd: config file for /etc/init.d/QUISHd
+
+# Config file location
+#BITCOIND_CONFIGFILE="/etc/QUISH/QUISH.conf"
+
+# What directory to write pidfile to?  (created and owned by $BITCOIND_USER)
+#BITCOIND_PIDDIR="/var/run/QUISHd"
+
+# What filename to give the pidfile
+#BITCOIND_PIDFILE="${BITCOIND_PIDDIR}/QUISHd.pid"
+
+# Where to write QUISHd data (be mindful that the blockchain is large)
+#BITCOIND_DATADIR="/var/lib/QUISHd"
+
+# User and group to own QUISHd process
+#BITCOIND_USER="QUISH"
+#BITCOIND_GROUP="QUISH"
+
+# Path to QUISHd executable
+#BITCOIND_BIN="/usr/bin/QUISHd"
+
+# Nice value to run QUISHd under
+#BITCOIND_NICE=0
+
+# Additional options (avoid -conf and -datadir, use flags above)
+#BITCOIND_OPTS=""
+
+# The timeout in seconds OpenRC will wait for bitcoind to terminate
+# after a SIGTERM has been raised.
+# Note that this will be mapped as argument to start-stop-daemon's
+# '--retry' option, which means you can specify a retry schedule
+# here. For more information see man 8 start-stop-daemon.
+BITCOIND_SIGTERM_TIMEOUT=60

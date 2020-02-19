@@ -1,0 +1,802 @@
+# Copyright (c) 2013-2016 The Bitcoin Core developers
+# Distributed under the MIT software license, see the accompanying
+# file COPYING or http://www.opensource.org/licenses/mit-license.php.
+
+bin_PROGRAMS += qt/QUISH-qt
+EXTRA_LIBRARIES += qt/libbitcoinqt.a
+
+# QUISH qt core #
+QT_TS = \
+  qt/locale/QUISH_bg.ts \
+  qt/locale/QUISH_ca.ts \
+  qt/locale/QUISH_cs.ts \
+  qt/locale/QUISH_da.ts \
+  qt/locale/QUISH_de.ts \
+  qt/locale/QUISH_en.ts \
+  qt/locale/QUISH_en_GB.ts \
+  qt/locale/QUISH_en_US.ts \
+  qt/locale/QUISH_eo.ts \
+  qt/locale/QUISH_es.ts \
+  qt/locale/QUISH_es_ES.ts \
+  qt/locale/QUISH_fi.ts \
+  qt/locale/QUISH_fr_FR.ts \
+  qt/locale/QUISH_hi_IN.ts \
+  qt/locale/QUISH_hr.ts \
+  qt/locale/QUISH_hr_HR.ts \
+  qt/locale/QUISH_it.ts \
+  qt/locale/QUISH_ja.ts \
+  qt/locale/QUISH_ko_KR.ts \
+  qt/locale/QUISH_lt_LT.ts \
+  qt/locale/QUISH_nl.ts \
+  qt/locale/QUISH_pl.ts \
+  qt/locale/QUISH_pt.ts \
+  qt/locale/QUISH_pt_BR.ts \
+  qt/locale/QUISH_ro_RO.ts \
+  qt/locale/QUISH_ru.ts \
+  qt/locale/QUISH_sk.ts \
+  qt/locale/QUISH_sv.ts \
+  qt/locale/QUISH_tr.ts \
+  qt/locale/QUISH_uk.ts \
+  qt/locale/QUISH_vi.ts \
+  qt/locale/QUISH_zh_CN.ts \
+  qt/locale/QUISH_zh_TW.ts
+
+QT_FORMS_UI = \
+  qt/forms/addressbookpage.ui \
+  qt/forms/askpassphrasedialog.ui \
+  qt/forms/coincontroldialog.ui \
+  qt/forms/blockexplorer.ui \
+  qt/forms/editaddressdialog.ui \
+  qt/forms/governancepage.ui \
+  qt/forms/helpmessagedialog.ui \
+  qt/forms/intro.ui \
+  qt/forms/openuridialog.ui \
+  qt/forms/optionsdialog.ui \
+  qt/forms/rpcconsole.ui \
+  qt/QUISH/forms/loadingdialog.ui \
+  qt/forms/zQTVcontroldialog.ui \
+  qt/QUISH/forms/snackbar.ui \
+  qt/QUISH/forms/navmenuwidget.ui \
+  qt/QUISH/forms/lockunlock.ui \
+  qt/QUISH/forms/expandablebutton.ui \
+  qt/QUISH/forms/receivedialog.ui \
+  qt/QUISH/forms/walletpassworddialog.ui \
+  qt/QUISH/forms/topbar.ui \
+  qt/QUISH/forms/txrow.ui \
+  qt/QUISH/forms/dashboardwidget.ui \
+  qt/QUISH/forms/coincontrolQTVwidget.ui \
+  qt/QUISH/forms/addresslabelrow.ui \
+  qt/QUISH/forms/contactdropdownrow.ui \
+  qt/QUISH/forms/mninfodialog.ui \
+  qt/QUISH/forms/optionbutton.ui \
+  qt/QUISH/forms/masternodewizarddialog.ui \
+  qt/QUISH/forms/mnrow.ui \
+  qt/QUISH/forms/masternodeswidget.ui \
+  qt/QUISH/forms/myaddressrow.ui \
+  qt/QUISH/forms/csrow.ui \
+  qt/QUISH/forms/sendchangeaddressdialog.ui \
+  qt/QUISH/forms/sendconfirmdialog.ui \
+  qt/QUISH/forms/sendcustomfeedialog.ui \
+  qt/QUISH/forms/sendchangeaddressdialog.ui \
+  qt/QUISH/forms/sendmultirow.ui \
+  qt/QUISH/forms/send.ui \
+  qt/QUISH/forms/addnewaddressdialog.ui \
+  qt/QUISH/forms/addnewcontactdialog.ui \
+  qt/QUISH/forms/requestdialog.ui \
+  qt/QUISH/forms/receivewidget.ui \
+  qt/QUISH/forms/tooltipmenu.ui \
+  qt/QUISH/forms/addresseswidget.ui \
+  qt/QUISH/forms/defaultdialog.ui \
+  qt/QUISH/forms/coldstakingwidget.ui \
+  qt/QUISH/settings/forms/settingsbackupwallet.ui \
+  qt/QUISH/settings/forms/settingsbittoolwidget.ui \
+  qt/QUISH/settings/forms/settingsconsolewidget.ui \
+  qt/QUISH/settings/forms/settingsdisplayoptionswidget.ui \
+  qt/QUISH/settings/forms/settingsfaqwidget.ui \
+  qt/QUISH/settings/forms/settingsinformationwidget.ui \
+  qt/QUISH/settings/forms/settingsmainoptionswidget.ui \
+  qt/QUISH/settings/forms/settingsmultisenddialog.ui \
+  qt/QUISH/settings/forms/settingsmultisendwidget.ui \
+  qt/QUISH/settings/forms/settingssignmessagewidgets.ui \
+  qt/QUISH/settings/forms/settingswalletoptionswidget.ui \
+  qt/QUISH/settings/forms/settingswalletrepairwidget.ui \
+  qt/QUISH/settings/forms/settingswidget.ui \
+  qt/QUISH/forms/welcomecontentwidget.ui \
+  qt/QUISH/forms/splash.ui
+
+QT_MOC_CPP = \
+  qt/moc_addressbookpage.cpp \
+  qt/moc_addresstablemodel.cpp \
+  qt/moc_askpassphrasedialog.cpp \
+  qt/moc_bantablemodel.cpp \
+  qt/moc_bitcoinaddressvalidator.cpp \
+  qt/moc_bitcoinamountfield.cpp \
+  qt/QUISH/moc_QUISHgui.cpp \
+  qt/moc_bitcoinunits.cpp \
+  qt/moc_blockexplorer.cpp \
+  qt/moc_clientmodel.cpp \
+  qt/moc_coincontroldialog.cpp \
+  qt/moc_coincontroltreewidget.cpp \
+  qt/moc_csvmodelwriter.cpp \
+  qt/moc_editaddressdialog.cpp \
+  qt/moc_governancepage.cpp \
+  qt/moc_guiutil.cpp \
+  qt/moc_intro.cpp \
+  qt/moc_macdockiconhandler.cpp \
+  qt/moc_macnotificationhandler.cpp \
+  qt/moc_notificator.cpp \
+  qt/moc_openuridialog.cpp \
+  qt/moc_optionsdialog.cpp \
+  qt/moc_optionsmodel.cpp \
+  qt/moc_peertablemodel.cpp \
+  qt/moc_paymentserver.cpp \
+  qt/moc_qvalidatedlineedit.cpp \
+  qt/moc_qvaluecombobox.cpp \
+  qt/moc_proposalframe.cpp \
+  qt/moc_recentrequeststablemodel.cpp \
+  qt/moc_rpcconsole.cpp \
+  qt/moc_splashscreen.cpp \
+  qt/moc_trafficgraphwidget.cpp \
+  qt/moc_transactiondesc.cpp \
+  qt/moc_transactionfilterproxy.cpp \
+  qt/moc_transactiontablemodel.cpp \
+  qt/moc_utilitydialog.cpp \
+  qt/moc_walletmodel.cpp \
+  qt/QUISH/moc_loadingdialog.cpp \
+  qt/moc_zQTVcontroldialog.cpp \
+  qt/QUISH/moc_pwidget.cpp \
+  qt/QUISH/moc_snackbar.cpp \
+  qt/QUISH/moc_navmenuwidget.cpp \
+  qt/QUISH/moc_lockunlock.cpp \
+  qt/QUISH/moc_expandablebutton.cpp \
+  qt/QUISH/moc_furabstractlistitemdelegate.cpp \
+  qt/QUISH/moc_receivedialog.cpp \
+  qt/QUISH/moc_walletpassworddialog.cpp \
+  qt/QUISH/moc_pfborderimage.cpp \
+  qt/QUISH/moc_topbar.cpp \
+  qt/QUISH/moc_txrow.cpp \
+  qt/QUISH/moc_dashboardwidget.cpp \
+  qt/QUISH/moc_coincontrolQTVwidget.cpp \
+  qt/QUISH/moc_addresslabelrow.cpp \
+  qt/QUISH/moc_contactdropdownrow.cpp \
+  qt/QUISH/moc_mninfodialog.cpp \
+  qt/QUISH/moc_optionbutton.cpp \
+  qt/QUISH/moc_coldstakingmodel.cpp \
+  qt/QUISH/moc_mnmodel.cpp \
+  qt/QUISH/moc_masternodewizarddialog.cpp \
+  qt/QUISH/moc_mnrow.cpp \
+  qt/QUISH/moc_masternodeswidget.cpp \
+  qt/QUISH/moc_myaddressrow.cpp \
+  qt/QUISH/moc_csrow.cpp \
+  qt/QUISH/moc_contactsdropdown.cpp \
+  qt/QUISH/moc_sendchangeaddressdialog.cpp \
+  qt/QUISH/moc_sendconfirmdialog.cpp \
+  qt/QUISH/moc_sendcustomfeedialog.cpp \
+  qt/QUISH/moc_sendchangeaddressdialog.cpp \
+  qt/QUISH/moc_sendmultirow.cpp \
+  qt/QUISH/moc_send.cpp \
+  qt/QUISH/moc_addnewaddressdialog.cpp \
+  qt/QUISH/moc_addnewcontactdialog.cpp \
+  qt/QUISH/moc_requestdialog.cpp \
+  qt/QUISH/moc_receivewidget.cpp \
+  qt/QUISH/moc_tooltipmenu.cpp \
+  qt/QUISH/moc_addresseswidget.cpp \
+  qt/QUISH/moc_defaultdialog.cpp \
+  qt/QUISH/moc_coldstakingwidget.cpp \
+  qt/QUISH/settings/moc_settingsbackupwallet.cpp \
+  qt/QUISH/settings/moc_settingsbittoolwidget.cpp \
+  qt/QUISH/settings/moc_settingsconsolewidget.cpp \
+  qt/QUISH/settings/moc_settingsdisplayoptionswidget.cpp \
+  qt/QUISH/settings/moc_settingsfaqwidget.cpp \
+  qt/QUISH/settings/moc_settingsinformationwidget.cpp \
+  qt/QUISH/settings/moc_settingsmainoptionswidget.cpp \
+  qt/QUISH/settings/moc_settingsmultisenddialog.cpp \
+  qt/QUISH/settings/moc_settingsmultisendwidget.cpp \
+  qt/QUISH/settings/moc_settingssignmessagewidgets.cpp \
+  qt/QUISH/settings/moc_settingswalletoptionswidget.cpp \
+  qt/QUISH/settings/moc_settingswalletrepairwidget.cpp \
+  qt/QUISH/settings/moc_settingswidget.cpp \
+  qt/QUISH/moc_welcomecontentwidget.cpp \
+  qt/QUISH/moc_splash.cpp
+
+BITCOIN_MM = \
+  qt/macdockiconhandler.mm \
+  qt/macnotificationhandler.mm
+
+QT_MOC = \
+  qt/QUISH.moc \
+  qt/bitcoinamountfield.moc \
+  qt/intro.moc \
+  qt/rpcconsole.moc \
+  qt/QUISH/settings/moc_settingsconsolewidget.cpp
+
+QT_QRC_CPP = qt/qrc_QUISH.cpp
+QT_QRC = qt/QUISH.qrc
+QT_QRC_LOCALE_CPP = qt/qrc_QUISH_locale.cpp
+QT_QRC_LOCALE = qt/QUISH_locale.qrc
+
+PROTOBUF_CC = qt/paymentrequest.pb.cc
+PROTOBUF_H = qt/paymentrequest.pb.h
+PROTOBUF_PROTO = qt/paymentrequest.proto
+
+BITCOIN_QT_H = \
+  qt/addressbookpage.h \
+  qt/addresstablemodel.h \
+  qt/askpassphrasedialog.h \
+  qt/bantablemodel.h \
+  qt/bitcoinaddressvalidator.h \
+  qt/bitcoinamountfield.h \
+  qt/QUISH/QUISHgui.h \
+  qt/bitcoinunits.h \
+  qt/blockexplorer.h \
+  qt/clientmodel.h \
+  qt/coincontroldialog.h \
+  qt/coincontroltreewidget.h \
+  qt/csvmodelwriter.h \
+  qt/editaddressdialog.h \
+  qt/governancepage.h \
+  qt/guiconstants.h \
+  qt/guiutil.h \
+  qt/intro.h \
+  qt/macdockiconhandler.h \
+  qt/macnotificationhandler.h \
+  qt/networkstyle.h \
+  qt/notificator.h \
+  qt/openuridialog.h \
+  qt/optionsdialog.h \
+  qt/optionsmodel.h \
+  qt/paymentrequestplus.h \
+  qt/paymentserver.h \
+  qt/peertablemodel.h \
+  qt/platformstyle.h \
+  qt/proposalframe.h \
+  qt/qvalidatedlineedit.h \
+  qt/qvaluecombobox.h \
+  qt/recentrequeststablemodel.h \
+  qt/rpcconsole.h \
+  qt/splashscreen.h \
+  qt/trafficgraphwidget.h \
+  qt/transactiondesc.h \
+  qt/transactionfilterproxy.h \
+  qt/transactionrecord.h \
+  qt/transactiontablemodel.h \
+  qt/utilitydialog.h \
+  qt/walletmodel.h \
+  qt/walletmodeltransaction.h \
+  qt/QUISH/prunnable.h \
+  qt/QUISH/pfborderimage.h \
+  qt/QUISH/loadingdialog.h \
+  qt/winshutdownmonitor.h \
+  qt/zQTVcontroldialog.h \
+  qt/QUISH/pwidget.h \
+  qt/QUISH/guitransactionsutils.h \
+  qt/QUISH/snackbar.h \
+  qt/QUISH/navmenuwidget.h \
+  qt/QUISH/lockunlock.h \
+  qt/QUISH/receivedialog.h \
+  qt/QUISH/furlistrow.h \
+  qt/QUISH/furabstractlistitemdelegate.h \
+  qt/QUISH/txviewholder.h \
+  qt/QUISH/qtutils.h \
+  qt/QUISH/expandablebutton.h \
+  qt/QUISH/walletpassworddialog.h \
+  qt/QUISH/topbar.h \
+  qt/QUISH/txrow.h \
+  qt/QUISH/addressholder.h \
+  qt/QUISH/addressfilterproxymodel.h \
+  qt/QUISH/dashboardwidget.h \
+  qt/QUISH/coincontrolQTVwidget.h \
+  qt/QUISH/addresslabelrow.h \
+  qt/QUISH/contactdropdownrow.h \
+  qt/QUISH/mninfodialog.h \
+  qt/QUISH/optionbutton.h \
+  qt/QUISH/coldstakingmodel.h \
+  qt/QUISH/mnmodel.h \
+  qt/QUISH/masternodewizarddialog.h \
+  qt/QUISH/mnrow.h \
+  qt/QUISH/masternodeswidget.h \
+  qt/QUISH/myaddressrow.h \
+  qt/QUISH/csrow.h \
+  qt/QUISH/contactsdropdown.h \
+  qt/QUISH/sendchangeaddressdialog.h \
+  qt/QUISH/sendconfirmdialog.h \
+  qt/QUISH/sendcustomfeedialog.h \
+  qt/QUISH/sendchangeaddressdialog.h \
+  qt/QUISH/sendmultirow.h \
+  qt/QUISH/send.h \
+  qt/QUISH/addnewaddressdialog.h \
+  qt/QUISH/addnewcontactdialog.h \
+  qt/QUISH/requestdialog.h \
+  qt/QUISH/receivewidget.h \
+  qt/QUISH/tooltipmenu.h \
+  qt/QUISH/addresseswidget.h \
+  qt/QUISH/defaultdialog.h \
+  qt/QUISH/coldstakingwidget.h \
+  qt/QUISH/settings/settingsbackupwallet.h \
+  qt/QUISH/settings/settingsbittoolwidget.h \
+  qt/QUISH/settings/settingsconsolewidget.h \
+  qt/QUISH/settings/settingsdisplayoptionswidget.h \
+  qt/QUISH/settings/settingsfaqwidget.h \
+  qt/QUISH/settings/settingsinformationwidget.h \
+  qt/QUISH/settings/settingsmainoptionswidget.h \
+  qt/QUISH/settings/settingsmultisenddialog.h \
+  qt/QUISH/settings/settingsmultisendwidget.h \
+  qt/QUISH/settings/settingssignmessagewidgets.h \
+  qt/QUISH/settings/settingswalletoptionswidget.h \
+  qt/QUISH/settings/settingswalletrepairwidget.h \
+  qt/QUISH/settings/settingswidget.h \
+  qt/QUISH/welcomecontentwidget.h \
+  qt/QUISH/splash.h
+
+RES_ICONS = \
+  qt/res/icons/bitcoin.ico \
+  qt/res/icons/bitcoin.png \
+  qt/res/icons/bitcoin_testnet.ico \
+  qt/res/icons/bitcoin_testnet.png \
+  qt/res/icons/bitcoin_regtest.png \
+  qt/res/icons/browse.png \
+  qt/res/icons/clock1.png \
+  qt/res/icons/clock2.png \
+  qt/res/icons/clock3.png \
+  qt/res/icons/clock4.png \
+  qt/res/icons/clock5.png \
+  qt/res/icons/configure.png \
+  qt/res/icons/connect0_16.png \
+  qt/res/icons/connect1_16.png \
+  qt/res/icons/connect2_16.png \
+  qt/res/icons/connect3_16.png \
+  qt/res/icons/connect4_16.png \
+  qt/res/icons/debugwindow.png \
+  qt/res/icons/edit.png \
+  qt/res/icons/editcopy.png \
+  qt/res/icons/editpaste.png \
+  qt/res/icons/explorer.png \
+  qt/res/icons/export.png \
+  qt/res/icons/eye.png \
+  qt/res/icons/eye_minus.png \
+  qt/res/icons/eye_plus.png \
+  qt/res/icons/filesave.png \
+  qt/res/icons/history.png \
+  qt/res/icons/key.png \
+  qt/res/icons/masternodes.png \
+  qt/res/icons/onion.png \
+  qt/res/icons/overview.png \
+  qt/res/icons/qrcode.png \
+  qt/res/icons/quit.png \
+  qt/res/icons/receive.png \
+  qt/res/icons/privacy.png \
+  qt/res/icons/remove.png \
+  qt/res/icons/send.png \
+  qt/res/icons/staking_active.png \
+  qt/res/icons/staking_inactive.png \
+  qt/res/icons/synced.png \
+  qt/res/icons/tx_inout.png \
+  qt/res/icons/tx_input.png \
+  qt/res/icons/tx_output.png \
+  qt/res/icons/tx_mined.png \
+  qt/QUISH/res/img/about.png \
+  qt/QUISH/res/img/bg-dashboard-banner.png \
+  qt/QUISH/res/img/bg-multi-number-dark.png \
+  qt/QUISH/res/img/ic-check-locked.png \
+  qt/QUISH/res/img/ic-nav-address.png \
+  qt/QUISH/res/img/ic-update.png \
+  qt/QUISH/res/img/bg-multi-number.png \
+  qt/QUISH/res/img/ic-check-mint-off.png \
+  qt/QUISH/res/img/ic-nav-cold-staking.png \
+  qt/QUISH/res/img/ic-nav-cold-staking-active.png \
+  qt/QUISH/res/img/ic-nav-dashboard-active.png \
+  qt/QUISH/res/img/ic-wallet-status-locked.png \
+  qt/QUISH/res/img/bg-splash.png \
+  qt/QUISH/res/img/ic-check-mint.png \
+  qt/QUISH/res/img/ic-nav-dashboard-hover.png \
+  qt/QUISH/res/img/ic-wallet-status-staking.png \
+  qt/QUISH/res/img/ic-check-peers-off.png \
+  qt/QUISH/res/img/ic-nav-dashboard.png \
+  qt/QUISH/res/img/ic-wallet-status-unlocked.png \
+  qt/QUISH/res/img/ic-check-peers.png \
+  qt/QUISH/res/img/ic-nav-master-active.png \
+  qt/QUISH/res/img/ic-watch-password-white.png \
+  qt/QUISH/res/img/bg-welcome-container.jpg \
+  qt/QUISH/res/img/bg-welcome-container.png \
+  qt/QUISH/res/img/bg-welcome-container@2x.png \
+  qt/QUISH/res/img/bg-welcome-container@3x.png \
+  qt/QUISH/res/img/ic-check-staking-off.png \
+  qt/QUISH/res/img/ic-nav-master-hover.png \
+  qt/QUISH/res/img/ic-watch-password.png \
+  qt/QUISH/res/img/bg-welcome.jpg \
+  qt/QUISH/res/img/bg-welcome@2x.png \
+  qt/QUISH/res/img/bg-welcome@3x.png \
+  qt/QUISH/res/img/bg-welcome.png \
+  qt/QUISH/res/img/ic-check-staking.png \
+  qt/QUISH/res/img/ic-nav-master.png \
+  qt/QUISH/res/img/img-dashboard-banner.jpg \
+  qt/QUISH/res/img/btn-radio-active.png \
+  qt/QUISH/res/img/ic-check-sync-off.png \
+  qt/QUISH/res/img/ic-nav-privacy-active.png \
+  qt/QUISH/res/img/img-empty-contacts.png \
+  qt/QUISH/res/img/btn-radio-off.png \
+  qt/QUISH/res/img/ic-check-sync.png \
+  qt/QUISH/res/img/ic-nav-privacy-hover.png \
+  qt/QUISH/res/img/img-empty-dark-contacts.png \
+  qt/QUISH/res/img/ic-contact-arrow-down.png \
+  qt/QUISH/res/img/ic-contact-arrow-down-white.png \
+  qt/QUISH/res/img/ic-check-faq.png \
+  qt/QUISH/res/img/ic-nav-privacy.png \
+  qt/QUISH/res/img/img-empty-dark-error.png \
+  qt/QUISH/res/img/ic-add-label.png \
+  qt/QUISH/res/img/ic-pending.png \
+  qt/QUISH/res/img/ic-check-theme-dark.png \
+  qt/QUISH/res/img/ic-nav-receive-active.png \
+  qt/QUISH/res/img/img-empty-dark-masternode.png \
+  qt/QUISH/res/img/ic-add-liliac.png \
+  qt/QUISH/res/img/ic-check-theme-light.png \
+  qt/QUISH/res/img/ic-nav-receive-hover.png \
+  qt/QUISH/res/img/img-empty-dark-multisend.png \
+  qt/QUISH/res/img/ic-add-primary.png \
+  qt/QUISH/res/img/ic-check-white.png \
+  qt/QUISH/res/img/ic-nav-receive.png \
+  qt/QUISH/res/img/img-empty-dark-peers.png \
+  qt/QUISH/res/img/ic-add.png \
+  qt/QUISH/res/img/ic-check.png \
+  qt/QUISH/res/img/ic-nav-send-active.png \
+  qt/QUISH/res/img/img-empty-dark-staking-off.png \
+  qt/QUISH/res/img/img-empty-dark-staking-on.png \
+  qt/QUISH/res/img/ic-address-book-grey.png \
+  qt/QUISH/res/img/ic-chevron-left.png \
+  qt/QUISH/res/img/ic-nav-send-hover.png \
+  qt/QUISH/res/img/img-empty-dark-transactions.png \
+  qt/QUISH/res/img/ic-address-book-white.png \
+  qt/QUISH/res/img/ic-chevron-right.png \
+  qt/QUISH/res/img/ic-nav-send.png \
+  qt/QUISH/res/img/img-empty-error.png \
+  qt/QUISH/res/img/ic-address-book.png \
+  qt/QUISH/res/img/ic-clear-liliac.png \
+  qt/QUISH/res/img/ic-nav-settings-active.png \
+  qt/QUISH/res/img/img-empty-masternode.png \
+  qt/QUISH/res/img/ic-address-send-white.png \
+  qt/QUISH/res/img/ic-clear-primary.png \
+  qt/QUISH/res/img/ic-nav-settings-hover.png \
+  qt/QUISH/res/img/img-empty-multisend.png \
+  qt/QUISH/res/img/ic-address-send.png \
+  qt/QUISH/res/img/ic-close-white.png \
+  qt/QUISH/res/img/ic-nav-settings.png \
+  qt/QUISH/res/img/img-empty-peers.png \
+  qt/QUISH/res/img/img-empty-privacy.png \
+  qt/QUISH/res/img/img-empty-privacy-dark.png \
+  qt/QUISH/res/img/ic-arrow-drop-down-white.png \
+  qt/QUISH/res/img/ic-close.png \
+  qt/QUISH/res/img/ic-radio-liliac-on.png \
+  qt/QUISH/res/img/img-empty-staking-off.png \
+  qt/QUISH/res/img/ic-arrow-drop-down.png \
+  qt/QUISH/res/img/ic-coin-QTV.png \
+  qt/QUISH/res/img/ic-receive-off.png \
+  qt/QUISH/res/img/img-empty-staking-on.png \
+  qt/QUISH/res/img/ic-arrow-drop-up-white.png \
+  qt/QUISH/res/img/ic-receive-on.png \
+  qt/QUISH/res/img/img-empty-transactions.png \
+  qt/QUISH/res/img/ic-arrow-drop-up.png \
+  qt/QUISH/res/img/ic-received.png \
+  qt/QUISH/res/img/img-logo-QUISH.png \
+  qt/QUISH/res/img/ic-arrow-drop-white-down.png \
+  qt/QUISH/res/img/ic-combo-box.png \
+  qt/QUISH/res/img/ic-send.png \
+  qt/QUISH/res/img/img-logo-QUISH@2x.png \
+  qt/QUISH/res/img/ic-arrow-primary-down.png \
+  qt/QUISH/res/img/ic-connect.png \
+  qt/QUISH/res/img/ic-submenu-lock.png \
+  qt/QUISH/res/img/img-logo-QUISH@3x.png \
+  qt/QUISH/res/img/ic-arrow-right-white.png \
+  qt/QUISH/res/img/ic-arrow-left-white.png \
+  qt/QUISH/res/img/ic-arrow-left.png \
+  qt/QUISH/res/img/ic-copy-liliac.png \
+  qt/QUISH/res/img/ic-submenu-staking.png \
+  qt/QUISH/res/img/img-nav-logo-QUISH.png \
+  qt/QUISH/res/img/ic-arrow-right.png \
+  qt/QUISH/res/img/ic-copy.png \
+  qt/QUISH/res/img/ic-copy-big.png \
+  qt/QUISH/res/img/ic-copy-big-white.png \
+  qt/QUISH/res/img/ic-submenu-unlock.png \
+  qt/QUISH/res/img/img-nav-logo.png \
+  qt/QUISH/res/img/ic-arrow-white-left.png \
+  qt/QUISH/res/img/ic-exit.png \
+  qt/QUISH/res/img/ic-switch-liliac-on.png \
+  qt/QUISH/res/img/ic-arrow-white-right.png \
+  qt/QUISH/res/img/ic-expand.png \
+  qt/QUISH/res/img/ic-switch-off.png \
+  qt/QUISH/res/img/img-qr-test-big.png \
+  qt/QUISH/res/img/ic-check-active.png \
+  qt/QUISH/res/img/ic-folder.png \
+  qt/QUISH/res/img/ic-switch-on.png \
+  qt/QUISH/res/img/img-qr-test.png \
+  qt/QUISH/res/img/ic-check-box.png \
+  qt/QUISH/res/img/ic-check-box-dark-active.png \
+  qt/QUISH/res/img/ic-check-box-indeterminate.png \
+  qt/QUISH/res/img/ic-check-box-liliac-indeterminate.png \
+  qt/QUISH/res/img/ic-label-liliac.png \
+  qt/QUISH/res/img/ic-transaction-warning.png \
+  qt/QUISH/res/img/ic-transaction-mint.png \
+  qt/QUISH/res/img/ic-transaction-mint-inactive.png \
+  qt/QUISH/res/img/ic-check-cold-staking.png \
+  qt/QUISH/res/img/ic-check-cold-staking-off.png \
+  qt/QUISH/res/img/ic-check-cold-staking-enabled.png \
+  qt/QUISH/res/img/dark/ic-transaction-cs-contract.png \
+  qt/QUISH/res/img/dark/ic-transaction-cs-contract-inactive.png \
+  qt/QUISH/res/img/img-qr.png \
+  qt/QUISH/res/img/ic-check-connect-off.png \
+  qt/QUISH/res/img/ic-label.png \
+  qt/QUISH/res/img/ic-transaction-received.png \
+  qt/QUISH/res/img/dark/ic-transaction-received.png \
+  qt/QUISH/res/img/dark/ic-transaction-warning.png \
+  qt/QUISH/res/img/dark/ic-transaction-mint.png \
+  qt/QUISH/res/img/dark/ic-transaction-mint-inactive.png \
+  qt/QUISH/res/img/ic-transaction-received-inactive.png \
+  qt/QUISH/res/img/dark/ic-transaction-received-inactive.png \
+  qt/QUISH/res/img/img-welcome-step1.png \
+  qt/QUISH/res/img/ic-check-connect.png \
+  qt/QUISH/res/img/ic-menu-hover.png \
+  qt/QUISH/res/img/ic-transaction-sent.png \
+  qt/QUISH/res/img/ic-transaction-sent-inactive.png \
+  qt/QUISH/res/img/dark/ic-transaction-sent.png \
+  qt/QUISH/res/img/dark/ic-transaction-sent-inactive.png \
+  qt/QUISH/res/img/img-welcome-step2.png \
+  qt/QUISH/res/img/ic-check-dark.png \
+  qt/QUISH/res/img/ic-mint.png \
+  qt/QUISH/res/img/ic-transaction-staked.png \
+  qt/QUISH/res/img/ic-transaction-staked-inactive.png \
+  qt/QUISH/res/img/dark/ic-transaction-staked.png \
+  qt/QUISH/res/img/dark/ic-transaction-staked-inactive.png \
+  qt/QUISH/res/img/img-welcome-step3.png \
+  qt/QUISH/res/img/ic-check-liliac-on.png \
+  qt/QUISH/res/img/ic-nav-address-active.png \
+  qt/QUISH/res/img/ic-unlock-staking.png \
+  qt/QUISH/res/img/img-welcome-step4.png \
+  qt/QUISH/res/img/ic-check-locked-off.png \
+  qt/QUISH/res/img/ic-nav-address-hover.png \
+  qt/QUISH/res/img/ic-update-liliac.png \
+  qt/QUISH/res/img/ic-arrow-drop-down-primary.png \
+  qt/QUISH/res/img/ic-arrow-drop-up-primary.png \
+  qt/QUISH/res/img/ic-check-liliac-indeterminate.png \
+  qt/QUISH/res/img/ic-check-box-liliac-indeterminate.png \
+  qt/QUISH/res/img/ic-transaction-stake-delegated.png \
+  qt/QUISH/res/img/ic-transaction-stake-delegated-inactive.png \
+  qt/QUISH/res/img/ic-transaction-stake-hot.png \
+  qt/QUISH/res/img/ic-transaction-stake-hot-inactive.png \
+  qt/QUISH/res/img/dark/ic-transaction-stake-hot.png \
+  qt/QUISH/res/img/dark/ic-transaction-stake-hot-inactive.png \
+  qt/QUISH/res/img/dark/ic-transaction-stake-delegated.png \
+  qt/QUISH/res/img/dark/ic-transaction-stake-delegated-inactive.png \
+  qt/QUISH/res/img/ic-transaction-cs-contract.png \
+  qt/QUISH/res/img/ic-transaction-cs-contract-inactive.png \
+  qt/QUISH/res/img/ic-check-box-indeterminate.png \
+  qt/QUISH/res/img/ani-loading-dark.gif \
+  qt/QUISH/res/img/ani-loading.gif
+
+
+
+BITCOIN_QT_BASE_CPP = \
+  qt/bantablemodel.cpp \
+  qt/bitcoinaddressvalidator.cpp \
+  qt/bitcoinamountfield.cpp \
+  qt/QUISH/QUISHgui.cpp \
+  qt/bitcoinunits.cpp \
+  qt/blockexplorer.cpp \
+  qt/clientmodel.cpp \
+  qt/csvmodelwriter.cpp \
+  qt/guiutil.cpp \
+  qt/intro.cpp \
+  qt/networkstyle.cpp \
+  qt/notificator.cpp \
+  qt/optionsdialog.cpp \
+  qt/optionsmodel.cpp \
+  qt/peertablemodel.cpp \
+  qt/platformstyle.cpp \
+  qt/qvalidatedlineedit.cpp \
+  qt/qvaluecombobox.cpp \
+  qt/rpcconsole.cpp \
+  qt/splashscreen.cpp \
+  qt/trafficgraphwidget.cpp \
+  qt/utilitydialog.cpp
+
+BITCOIN_QT_WINDOWS_CPP = qt/winshutdownmonitor.cpp
+
+BITCOIN_QT_WALLET_CPP = \
+  qt/addressbookpage.cpp \
+  qt/addresstablemodel.cpp \
+  qt/askpassphrasedialog.cpp \
+  qt/blockexplorer.cpp \
+  qt/coincontroldialog.cpp \
+  qt/coincontroltreewidget.cpp \
+  qt/editaddressdialog.cpp \
+  qt/governancepage.cpp \
+  qt/openuridialog.cpp \
+  qt/paymentrequestplus.cpp \
+  qt/paymentserver.cpp \
+  qt/proposalframe.cpp \
+  qt/recentrequeststablemodel.cpp \
+  qt/transactiondesc.cpp \
+  qt/transactionfilterproxy.cpp \
+  qt/transactionrecord.cpp \
+  qt/transactiontablemodel.cpp \
+  qt/walletmodel.cpp \
+  qt/walletmodeltransaction.cpp \
+  qt/QUISH/loadingdialog.cpp \
+  qt/zQTVcontroldialog.cpp \
+  qt/QUISH/pwidget.cpp \
+  qt/QUISH/guitransactionsutils.cpp \
+  qt/QUISH/snackbar.cpp \
+  qt/QUISH/navmenuwidget.cpp \
+  qt/QUISH/lockunlock.cpp \
+  qt/QUISH/receivedialog.cpp \
+  qt/QUISH/furabstractlistitemdelegate.cpp \
+  qt/QUISH/txviewholder.cpp \
+  qt/QUISH/qtutils.cpp \
+  qt/QUISH/expandablebutton.cpp \
+  qt/QUISH/walletpassworddialog.cpp \
+  qt/QUISH/topbar.cpp \
+  qt/QUISH/txrow.cpp \
+  qt/QUISH/addressholder.cpp \
+  qt/QUISH/addressfilterproxymodel.cpp \
+  qt/QUISH/dashboardwidget.cpp \
+  qt/QUISH/coincontrolQTVwidget.cpp \
+  qt/QUISH/addresslabelrow.cpp \
+  qt/QUISH/contactdropdownrow.cpp \
+  qt/QUISH/contactsdropdown.cpp \
+  qt/QUISH/optionbutton.cpp \
+  qt/QUISH/mninfodialog.cpp \
+  qt/QUISH/coldstakingmodel.cpp \
+  qt/QUISH/mnmodel.cpp \
+  qt/QUISH/masternodewizarddialog.cpp \
+  qt/QUISH/mnrow.cpp \
+  qt/QUISH/masternodeswidget.cpp \
+  qt/QUISH/myaddressrow.cpp \
+  qt/QUISH/csrow.cpp \
+  qt/QUISH/sendchangeaddressdialog.cpp \
+  qt/QUISH/sendconfirmdialog.cpp \
+  qt/QUISH/sendcustomfeedialog.cpp \
+  qt/QUISH/sendchangeaddressdialog.cpp \
+  qt/QUISH/sendmultirow.cpp \
+  qt/QUISH/send.cpp \
+  qt/QUISH/addnewaddressdialog.cpp \
+  qt/QUISH/addnewcontactdialog.cpp \
+  qt/QUISH/requestdialog.cpp \
+  qt/QUISH/receivewidget.cpp \
+  qt/QUISH/tooltipmenu.cpp \
+  qt/QUISH/addresseswidget.cpp \
+  qt/QUISH/defaultdialog.cpp \
+  qt/QUISH/coldstakingwidget.cpp \
+  qt/QUISH/settings/settingsbackupwallet.cpp \
+  qt/QUISH/settings/settingsbittoolwidget.cpp \
+  qt/QUISH/settings/settingsconsolewidget.cpp \
+  qt/QUISH/settings/settingsdisplayoptionswidget.cpp \
+  qt/QUISH/settings/settingsfaqwidget.cpp \
+  qt/QUISH/settings/settingsinformationwidget.cpp \
+  qt/QUISH/settings/settingsmainoptionswidget.cpp \
+  qt/QUISH/settings/settingsmultisenddialog.cpp \
+  qt/QUISH/settings/settingsmultisendwidget.cpp \
+  qt/QUISH/settings/settingssignmessagewidgets.cpp \
+  qt/QUISH/settings/settingswalletoptionswidget.cpp \
+  qt/QUISH/settings/settingswalletrepairwidget.cpp \
+  qt/QUISH/settings/settingswidget.cpp \
+  qt/QUISH/welcomecontentwidget.cpp \
+  qt/QUISH/splash.cpp
+
+
+BITCOIN_QT_CPP = $(BITCOIN_QT_BASE_CPP)
+if TARGET_WINDOWS
+BITCOIN_QT_CPP += $(BITCOIN_QT_WINDOWS_CPP)
+endif
+if ENABLE_WALLET
+BITCOIN_QT_CPP += $(BITCOIN_QT_WALLET_CPP)
+endif
+
+RES_CSS = \
+  qt/QUISH/res/css/style_dark.css \
+  qt/QUISH/res/css/style_light.css
+
+RES_MOVIES = $(wildcard $(srcdir)/qt/res/movies/spinner-*.png)
+
+BITCOIN_RC = qt/res/QUISH-qt-res.rc
+
+BITCOIN_QT_INCLUDES = -I$(builddir)/qt -I$(srcdir)/qt -I$(srcdir)/qt/forms \
+  -I$(builddir)/qt/forms
+
+qt_libbitcoinqt_a_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES) $(BITCOIN_QT_INCLUDES) \
+  $(QT_INCLUDES) $(QT_DBUS_INCLUDES) $(PROTOBUF_CFLAGS) $(QR_CFLAGS) $(SVG_CFLAGS) $(CHARTS_CFLAGS)
+qt_libbitcoinqt_a_CXXFLAGS = $(AM_CXXFLAGS) $(QT_PIE_FLAGS)
+qt_libbitcoinqt_a_OBJCXXFLAGS = $(AM_OBJCXXFLAGS) $(QT_PIE_FLAGS)
+
+qt_libbitcoinqt_a_SOURCES = $(BITCOIN_QT_CPP) $(BITCOIN_QT_H) $(QT_FORMS_UI) \
+  $(QT_QRC) $(QT_QRC_LOCALE) $(QT_TS) $(PROTOBUF_PROTO) $(RES_ICONS) $(RES_CSS) $(RES_MOVIES)
+
+nodist_qt_libbitcoinqt_a_SOURCES = $(QT_MOC_CPP) $(QT_MOC) $(PROTOBUF_CC) \
+  $(PROTOBUF_H) $(QT_QRC_CPP) $(QT_QRC_LOCALE_CPP)
+
+# forms/foo.h -> forms/ui_foo.h
+QT_FORMS_H=$(join $(dir $(QT_FORMS_UI)),$(addprefix ui_, $(notdir $(QT_FORMS_UI:.ui=.h))))
+
+# Most files will depend on the forms and moc files as includes. Generate them
+# before anything else.
+$(QT_MOC): $(QT_FORMS_H)
+$(qt_libbitcoinqt_a_OBJECTS) $(qt_QUISH_qt_OBJECTS) : | $(QT_MOC)
+
+#Generating these with a half-written protobuf header leads to wacky results.
+#This makes sure it's done.
+$(QT_MOC): $(PROTOBUF_H)
+$(QT_MOC_CPP): $(PROTOBUF_H)
+
+# QUISH-qt binary #
+qt_QUISH_qt_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES) $(BITCOIN_QT_INCLUDES) \
+  $(QT_INCLUDES) $(PROTOBUF_CFLAGS) $(QR_CFLAGS) $(SVG_CFLAGS) $(CHARTS_CFLAGS)
+qt_QUISH_qt_CXXFLAGS = $(AM_CXXFLAGS) $(QT_PIE_FLAGS)
+
+qt_QUISH_qt_SOURCES = qt/QUISH.cpp
+if TARGET_DARWIN
+  qt_QUISH_qt_SOURCES += $(BITCOIN_MM)
+endif
+if TARGET_WINDOWS
+  qt_QUISH_qt_SOURCES += $(BITCOIN_RC)
+endif
+qt_QUISH_qt_LDADD = qt/libbitcoinqt.a $(LIBBITCOIN_SERVER)
+if ENABLE_WALLET
+qt_QUISH_qt_LDADD += $(LIBBITCOIN_UTIL) $(LIBBITCOIN_WALLET)
+endif
+if ENABLE_ZMQ
+qt_QUISH_qt_LDADD += $(LIBBITCOIN_ZMQ) $(ZMQ_LIBS)
+endif
+qt_QUISH_qt_LDADD += $(LIBBITCOIN_CLI) $(LIBBITCOIN_COMMON) $(LIBBITCOIN_UTIL) $(LIBBITCOIN_CRYPTO) $(LIBUNIVALUE) $(LIBBITCOIN_ZEROCOIN) $(LIBLEVELDB) $(LIBLEVELDB_SSE42) $(LIBMEMENV) \
+  $(BOOST_LIBS) $(QT_LIBS) $(QT_DBUS_LIBS) $(QR_LIBS) $(PROTOBUF_LIBS) $(SVG_LIBS) $(CHARTS_LIBS) $(BDB_LIBS) $(SSL_LIBS) $(CRYPTO_LIBS) $(MINIUPNPC_LIBS) $(LIBSECP256K1) \
+  $(EVENT_PTHREADS_LIBS) $(EVENT_LIBS)
+qt_QUISH_qt_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(QT_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
+qt_QUISH_qt_LIBTOOLFLAGS = $(AM_LIBTOOLFLAGS) --tag CXX
+
+#locale/foo.ts -> locale/foo.qm
+QT_QM=$(QT_TS:.ts=.qm)
+
+SECONDARY: $(QT_QM)
+
+$(srcdir)/qt/QUISHstrings.cpp: $(libbitcoin_server_a_SOURCES) $(libbitcoin_wallet_a_SOURCES) $(libbitcoin_common_a_SOURCES) $(libbitcoin_zmq_a_SOURCES) $(libbitcoin_util_a_SOURCES)
+	@test -n $(XGETTEXT) || echo "xgettext is required for updating translations"
+	$(AM_V_GEN) cd $(srcdir); XGETTEXT=$(XGETTEXT) PACKAGE_NAME="$(PACKAGE_NAME)" $(PYTHON) ../share/qt/extract_strings_qt.py $^
+
+translate: $(srcdir)/qt/QUISHstrings.cpp $(QT_FORMS_UI) $(QT_FORMS_UI) $(BITCOIN_QT_BASE_CPP) qt/QUISH.cpp $(BITCOIN_QT_WINDOWS_CPP) $(BITCOIN_QT_WALLET_CPP) $(BITCOIN_QT_H) $(BITCOIN_MM)
+	@test -n $(LUPDATE) || echo "lupdate is required for updating translations"
+	$(AM_V_GEN) QT_SELECT=$(QT_SELECT) $(LUPDATE) $^ -locations relative -no-obsolete -ts $(srcdir)/qt/locale/QUISH_en.ts
+
+$(QT_QRC_LOCALE_CPP): $(QT_QRC_LOCALE) $(QT_QM)
+	@test -f $(RCC)
+	@cp -f $< $(@D)/temp_$(<F)
+	$(AM_V_GEN) QT_SELECT=$(QT_SELECT) $(RCC) -name QUISH_locale $(@D)/temp_$(<F) | \
+	  $(SED) -e '/^\*\*.*Created:/d' -e '/^\*\*.*by:/d' > $@
+	@rm $(@D)/temp_$(<F)
+
+$(QT_QRC_CPP): $(QT_QRC) $(QT_FORMS_H) $(RES_ICONS) $(RES_CSS) $(RES_MOVIES) $(PROTOBUF_H)
+	@test -f $(RCC)
+	$(AM_V_GEN) QT_SELECT=$(QT_SELECT) $(RCC) -name QUISH $< | \
+	  $(SED) -e '/^\*\*.*Created:/d' -e '/^\*\*.*by:/d' > $@
+
+CLEAN_QT = $(nodist_qt_libbitcoinqt_a_SOURCES) $(QT_QM) $(QT_FORMS_H) qt/*.gcda qt/*.gcno qt/temp_QUISH_locale.qrc
+
+CLEANFILES += $(CLEAN_QT)
+
+QUISH_qt_clean: FORCE
+	rm -f $(CLEAN_QT) $(qt_libbitcoinqt_a_OBJECTS) $(qt_QUISH_qt_OBJECTS) qt/QUISH-qt$(EXEEXT) $(LIBBITCOINQT)
+
+QUISH_qt : qt/QUISH-qt$(EXEEXT)
+
+ui_%.h: %.ui
+	@test -f $(UIC)
+	@$(MKDIR_P) $(@D)
+	$(AM_V_GEN) QT_SELECT=$(QT_SELECT) $(UIC) -o $@ $< || (echo "Error creating $@"; false)
+
+%.moc: %.cpp
+	$(AM_V_GEN) QT_SELECT=$(QT_SELECT) $(MOC) $(DEFAULT_INCLUDES) $(QT_INCLUDES) $(MOC_DEFS) $< | \
+	  $(SED) -e '/^\*\*.*Created:/d' -e '/^\*\*.*by:/d' > $@
+
+moc_%.cpp: %.h
+	$(AM_V_GEN) QT_SELECT=$(QT_SELECT) $(MOC) $(DEFAULT_INCLUDES) $(QT_INCLUDES) $(MOC_DEFS) $< | \
+	  $(SED) -e '/^\*\*.*Created:/d' -e '/^\*\*.*by:/d' > $@
+
+%.qm: %.ts
+	@test -f $(LRELEASE)
+	@$(MKDIR_P) $(@D)
+	$(AM_V_GEN) QT_SELECT=$(QT_SELECT) $(LRELEASE) -silent $< -qm $@

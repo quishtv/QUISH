@@ -1,0 +1,13 @@
+[Desktop Entry]
+Version=1.0
+Name=QUISH
+Comment=QUISH P2P Cryptocurrency
+Comment[fr]=QUISH, monnaie virtuelle cryptographique pair à pair
+Comment[tr]=QUISH, eşten eşe kriptografik sanal para birimi
+Exec=QUISH-qt %u
+Terminal=false
+Type=Application
+Icon=QUISH128
+MimeType=x-scheme-handler/QUISH;
+Categories=Office;Finance;
+StartupWMClass=QUISH-qt

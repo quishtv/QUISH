@@ -1,0 +1,6 @@
+usr/local/bin/QUISH-qt usr/bin
+share/pixmaps/QUISH32.xpm usr/share/pixmaps
+share/pixmaps/QUISH16.xpm usr/share/pixmaps
+share/pixmaps/QUISH128.png usr/share/pixmaps
+debian/QUISH-qt.desktop usr/share/applications
+debian/QUISH-qt.protocol usr/share/kde4/services/

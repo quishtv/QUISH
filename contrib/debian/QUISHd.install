@@ -1,0 +1,3 @@
+usr/local/bin/QUISHd usr/bin
+usr/local/bin/QUISH-cli usr/bin
+debian/examples/QUISH.conf etc/QUISH

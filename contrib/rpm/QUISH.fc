@@ -1,0 +1,8 @@
+/usr/bin/QUISH-cli		--	gen_context(system_u:object_r:QUISH_exec_t,s0)
+/usr/sbin/QUISHd		--	gen_context(system_u:object_r:QUISH_exec_t,s0)
+/usr/lib(64)?/QUISH/QUISHd		--	gen_context(system_u:object_r:QUISH_exec_t,s0)
+
+/etc/QUISH(/.*)?		gen_context(system_u:object_r:QUISH_conf_t,s0)
+/var/lib/QUISH(/.*)?		gen_context(system_u:object_r:QUISH_var_lib_t,s0)
+
+(/var)?/run/QUISHd(/.*)?   gen_context(system_u:object_r:QUISH_var_run_t,s0)
